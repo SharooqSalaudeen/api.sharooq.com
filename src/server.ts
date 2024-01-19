@@ -3,12 +3,12 @@ const result = dotenv.config()
 if (result.error) {
     dotenv.config({ path: '.env' })
 }
-
-import express, { Request, Response } from 'express'
-// const cors = require('cors');
+import cors from 'cors'
+import express from 'express'
 import { logger } from './utils/logger'
 import MongoConnection from './utils/mongo-connection'
 import { config } from './config/config'
+import apiRouter from './routes'
 
 const mongoConnection = new MongoConnection(config.mongodb_uri ?? '')
 const port = config.port
@@ -17,6 +17,7 @@ const app = express()
 //  Middleware
 app.use(express.json())
 app.use(express.urlencoded())
+app.use(cors())
 
 // Connect to MongoDB
 if (config.mongodb_uri == null) {
@@ -37,10 +38,8 @@ if (config.mongodb_uri == null) {
     })
 }
 
-// Create a simple route
-app.get('/', (req: Request, res: Response) =>
-    res.send('Hello World with TypeScript!')
-)
+// Routes
+app.use('/', apiRouter)
 
 // Close the Mongoose connection, when receiving SIGINT
 process.on('SIGINT', () => {
