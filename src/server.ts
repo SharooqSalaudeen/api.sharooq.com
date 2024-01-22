@@ -5,6 +5,7 @@ if (result.error) {
 }
 import cors from 'cors'
 import express from 'express'
+import { apiLimiter } from './utils/rate-limit'
 import { logger } from './utils/logger'
 import MongoConnection from './utils/mongo-connection'
 import { config } from './config/config'
@@ -18,6 +19,9 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
+if (config.node_env != 'development') {
+    app.use(apiLimiter)
+}
 
 // Connect to MongoDB
 if (config.mongodb_uri == null) {
