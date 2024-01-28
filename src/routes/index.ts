@@ -5,11 +5,11 @@ import messageRoutes from './messageRoutes' // Adjust with your actual route fil
 const router = express.Router()
 
 // Create a simple route
-router.get('/', (_req, res) => {
+router.get('/portfolio/', (_req, res) => {
     res.send('Hello World with TypeScript!')
 })
 
-router.use('/', messageRoutes)
+router.use('/portfolio/', messageRoutes)
 // router.use('/another', anotherRoutes);
 
 export default router
