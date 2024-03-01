@@ -9,7 +9,7 @@
         "dev": "nodemon",
         "lint": "eslint . --ext .ts",
         "test": "jest",
-        "build": "tsc && node createProdPackageJson.js"
+        "build": "tsc && ts-node createProdPackageJson.js"
     },
     "keywords": [],
     "author": "",

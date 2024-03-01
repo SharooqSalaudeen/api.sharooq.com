@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
 const devPackageJsonPath = path.join(__dirname, 'package.json')
 const prodPackageJsonPath = path.join(__dirname, 'dist', 'package.json')
